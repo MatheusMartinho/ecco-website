@@ -12,11 +12,7 @@ export default function Gallery() {
       <div className="grid grid-cols-3 md:grid-cols-7 gap-2 md:gap-3">
         {images.map((num) => (
           <div key={num} className="aspect-square bg-muted overflow-hidden hover:opacity-80 transition cursor-pointer">
-            <img
-              src={`/fashion-photography-portrait-.jpg?height=120&width=120&query=fashion photography portrait ${num}`}
-              alt={`Portfolio work ${num}`}
-              className="w-full h-full object-cover"
-            />
+            {/* Imagem removida - substitua pela sua própria galeria de imagens */}
           </div>
         ))}
       </div>
