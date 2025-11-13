@@ -15,18 +15,37 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Social Links Section */}
-        <div className="grid grid-cols-3 gap-8 mb-32">
-          <div>
-            <p className="text-sm uppercase tracking-widest font-semibold">Email</p>
-          </div>
-          <div className="text-center">
-            <p className="text-sm uppercase tracking-widest font-semibold">Insta</p>
-          </div>
-          <div className="text-right">
-            <p className="text-sm uppercase tracking-widest font-semibold">Linkedin</p>
-          </div>
-        </div>
+{/* Social Links Section */}
+<div className="grid grid-cols-3 gap-8 mb-32">
+  <div>
+    <a 
+      href="mailto:alessandra@exemplo.com" 
+      className="text-sm uppercase tracking-widest font-semibold hover:text-primary-foreground/80 transition"
+    >
+      Email
+    </a>
+  </div>
+  <div className="text-center">
+    <a 
+      href="https://www.instagram.com/ecco_arte_que_ressoa/?next=%2F" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="text-sm uppercase tracking-widest font-semibold hover:text-primary-foreground/80 transition"
+    >
+      Insta
+    </a>
+  </div>
+  <div className="text-right">
+    <a 
+      href="https://br.linkedin.com/in/alessandra-santos-b6866022" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="text-sm uppercase tracking-widest font-semibold hover:text-primary-foreground/80 transition"
+    >
+      Linkedin
+    </a>
+  </div>
+</div>
 
         {/* Made By Section */}
         <div className="text-center mb-8">
