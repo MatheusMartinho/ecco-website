@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="px-6 md:px-12 py-20">
+    <footer className="pt-16 pb-0 bg-primary text-primary-foreground">
+      <div className="px-6 md:px-12 pt-20 pb-0">
         {/* Top Section: 3 Columns */}
         <div className="grid grid-cols-3 gap-8 mb-20">
           <div>
@@ -29,12 +29,12 @@ export default function Footer() {
         </div>
 
         {/* Made By Section */}
-        <div className="text-center mb-20">
-          <p className="text-sm uppercase tracking-widest font-semibold">Feito por</p>
+        <div className="text-center mb-8">
+          <p className="text-sm uppercase tracking-widest font-semibold">Made by</p>
         </div>
 
-        {/* Large A.D Logo */}
-        <div className="flex items-center justify-center gap-6 text-9xl font-bold tracking-tighter">
+        {/* Large A.S Logo */}
+        <div className="flex items-center justify-between text-[25rem] font-bold tracking-tighter leading-none px-12 pb-2">
           <span>A</span>
           <span className="w-4 h-4 bg-primary-foreground rounded-full" />
           <span>S</span>
