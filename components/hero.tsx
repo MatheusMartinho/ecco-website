@@ -1,46 +1,101 @@
+'use client'
+
+import { motion } from "framer-motion"
+import { AnimatedText } from "./animated-text"
+import { useLanguage } from "./language-provider"
+
 export default function Hero() {
+  const { t } = useLanguage()
+
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-6 md:px-12">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-center min-h-[600px]">
+    <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 overflow-hidden pt-20">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center w-full max-w-screen-2xl mx-auto">
+
         {/* Left Image - Small Fashion */}
-        <div className="self-end md:col-span-3 flex justify-start items-center md:items-start pt-12 md:pt-0">
-          <div className="w-48 h-48 md:w-80 md:h-96 bg-muted overflow-hidden flex-shrink-0 border border-foreground/10">
-            <img
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+          className="md:col-span-3 flex justify-start items-center md:items-end h-full order-2 md:order-1"
+        >
+          <div className="relative w-48 h-64 md:w-72 md:h-[500px] overflow-hidden">
+            <motion.img
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
               src="https://i.imgur.com/6TgcMQ7.png"
-              alt="Side profile of model"
-              className="w-full h-full object-cover"
-            /> 
-          </div>
-        </div>
-
-        {/* Center Content + Right Image - JUNTOS AGORA */}
-        <div className="md:col-span-9 relative flex justify-end items-center md:items-start pt-12 md:pt-0">
-          {/* TEXTO SOBREPOSTO */}
-          <div className="absolute inset-0 flex items-center justify-start -translate-x-24 z-10 pointer-events-none">
-            <h1 className="text-3xl md:text-6xl font-light tracking-wide">
-              <span className="text-white">AL</span>
-              <span className="text-foreground">ESSANDRA SANTOS</span>
-            </h1>
-          </div>
-
-          {/* Right Image */}
-          <div className="w-96 h-96 md:w-96 md:h-full bg-muted overflow-hidden flex-shrink-0 border border-foreground/10">
-            <img
-              src="https://i.imgur.com/tt7MaZh.png"
-              alt="Imagem"
-              className="w-full h-full object-cover"
+              alt={t.hero.leftAlt}
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
           </div>
+        </motion.div>
+
+        {/* Center Content - Title */}
+        <div className="md:col-span-6 flex flex-col items-center justify-center text-center z-10 order-1 md:order-2 mix-blend-difference text-white">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-5xl md:text-8xl lg:text-9xl font-serif tracking-tighter leading-none"
+          >
+            ALESSANDRA
+          </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-5xl md:text-8xl lg:text-9xl font-serif tracking-tighter leading-none italic"
+          >
+            SANTOS
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="mt-6 text-xs md:text-sm uppercase tracking-[0.3em] font-light"
+          >
+            <AnimatedText id="hero-tagline" text={t.hero.tagline} />
+          </motion.p>
         </div>
+
+        {/* Right Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+          className="md:col-span-3 flex justify-end items-start h-full order-3"
+        >
+          <div className="relative w-56 h-56 md:w-80 md:h-[400px] overflow-hidden mt-12 md:mt-0">
+            <motion.img
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              src="https://i.imgur.com/tt7MaZh.png"
+              alt={t.hero.rightAlt}
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </div>
+        </motion.div>
       </div>
 
-      <div className="mt-32 md:mt-40 flex flex-col items-center justify-center text-center">
-        <p className="text-xs font-medium uppercase tracking-widest text-foreground mb-3">28 Projetos</p>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground mb-6">Descubra Mais</p>
-        <svg className="w-4 h-4 text-foreground animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </div>
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+      >
+        <span className="text-[10px] uppercase tracking-widest">
+          <AnimatedText id="hero-scroll" text={t.hero.scroll} />
+        </span>
+        <div className="w-[1px] h-12 bg-foreground/20 overflow-hidden">
+          <motion.div
+            animate={{ y: ["-100%", "100%"] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+            className="w-full h-1/2 bg-foreground"
+          />
+        </div>
+      </motion.div>
     </section>
   )
 }
