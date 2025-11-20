@@ -1,8 +1,12 @@
 'use client'
 
 import { motion } from "framer-motion"
+import { AnimatedText } from "./animated-text"
+import { useLanguage } from "./language-provider"
 
 export default function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="pt-16 pb-0 bg-primary text-primary-foreground overflow-hidden">
       <div className="px-6 md:px-12 pt-20 pb-0">
@@ -15,13 +19,19 @@ export default function Footer() {
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
         >
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">Alessandra M Santos</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">
+              <AnimatedText id="footer-name" text={t.footer.name} />
+            </p>
           </div>
           <div className="md:text-center">
-            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">Couture Production</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">
+              <AnimatedText id="footer-role" text={t.footer.role} />
+            </p>
           </div>
           <div className="md:text-right">
-            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">São Paulo, Brasil</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-light opacity-80">
+              <AnimatedText id="footer-location" text={t.footer.location} />
+            </p>
           </div>
         </motion.div>
 
@@ -38,7 +48,7 @@ export default function Footer() {
               href="mailto:alessandra@exemplo.com"
               className="text-xs uppercase tracking-[0.2em] font-medium hover:text-accent transition-colors"
             >
-              Email
+              <AnimatedText id="footer-email" text={t.footer.email} />
             </a>
           </div>
           <div className="md:text-center">
@@ -48,7 +58,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-xs uppercase tracking-[0.2em] font-medium hover:text-accent transition-colors"
             >
-              Instagram
+              <AnimatedText id="footer-instagram" text={t.footer.instagram} />
             </a>
           </div>
           <div className="md:text-right">
@@ -58,14 +68,16 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-xs uppercase tracking-[0.2em] font-medium hover:text-accent transition-colors"
             >
-              Linkedin
+              <AnimatedText id="footer-linkedin" text={t.footer.linkedin} />
             </a>
           </div>
         </motion.div>
 
         {/* Made By Section */}
         <div className="text-center mb-8">
-          <p className="text-[10px] uppercase tracking-widest opacity-50">Made by Matheus Moura Martinho</p>
+          <p className="text-[10px] uppercase tracking-widest opacity-50">
+            <AnimatedText id="footer-credit" text={t.footer.credit} />
+          </p>
         </div>
 
         {/* Large A.S Logo */}

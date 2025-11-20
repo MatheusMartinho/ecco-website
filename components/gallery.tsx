@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from './language-provider'
+import { AnimatedText } from './animated-text'
 
 export default function Gallery() {
+  const { t } = useLanguage()
   const imageUrls = [
     'https://i.imgur.com/EI4VFNQ.png',
     'https://i.imgur.com/ktkqL7I.png',
@@ -92,7 +95,7 @@ export default function Gallery() {
           transition={{ duration: 0.6 }}
           className="text-xs uppercase tracking-widest text-muted-foreground mb-2"
         >
-          Editorial Works
+          <AnimatedText id="gallery-title" text={t.gallery.title} />
         </motion.h2>
       </div>
 
@@ -112,7 +115,7 @@ export default function Gallery() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.4 }}
               src={url}
-              alt={`Portfolio work ${index + 1}`}
+              alt={`${t.gallery.altPrefix} ${index + 1}`}
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
             />
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -3,8 +3,12 @@
 import { motion } from "framer-motion"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { useLanguage } from "@/components/language-provider"
+import { AnimatedText } from "@/components/animated-text"
 
 export default function ContactPage() {
+    const { t } = useLanguage()
+
     return (
         <main className="bg-background min-h-screen flex flex-col">
             <Header />
@@ -18,7 +22,9 @@ export default function ContactPage() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="mb-20 md:mb-32"
                 >
-                    <h1 className="text-6xl md:text-9xl font-serif tracking-tighter">INQUIRIES</h1>
+                    <h1 className="text-6xl md:text-9xl font-serif tracking-tighter">
+                        <AnimatedText id="contact-title" text={t.contact.title} />
+                    </h1>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
@@ -31,27 +37,35 @@ export default function ContactPage() {
                         className="md:col-span-4 space-y-12"
                     >
                         <div>
-                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Email</h2>
+                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                                <AnimatedText id="contact-email-label" text={t.contact.emailLabel} />
+                            </h2>
                             <a href="mailto:contact@alessandrasantos.com" className="text-lg md:text-xl font-serif italic hover:text-accent transition-colors">
-                                contact@alessandrasantos.com
+                                <AnimatedText id="contact-email-value" text={t.contact.emailValue} />
                             </a>
                         </div>
 
                         <div>
-                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Studio</h2>
+                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                                <AnimatedText id="contact-studio-label" text={t.contact.studioLabel} />
+                            </h2>
                             <p className="text-lg md:text-xl font-serif italic">
-                                Rua Oscar Freire, 1234<br />
-                                Jardins, São Paulo<br />
-                                Brasil
+                                {t.contact.studioAddress.map((line, index) => (
+                                    <span key={index} className="block">
+                                        <AnimatedText id={`contact-studio-line-${index}`} text={line} />
+                                    </span>
+                                ))}
                             </p>
                         </div>
 
                         <div>
-                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Socials</h2>
+                            <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                                <AnimatedText id="contact-socials-label" text={t.contact.socialsLabel} />
+                            </h2>
                             <div className="flex flex-col gap-2">
-                                {["Instagram", "LinkedIn", "Behance"].map((social) => (
+                                {t.contact.socials.map((social) => (
                                     <a key={social} href="#" className="text-sm uppercase tracking-widest hover:text-accent transition-colors w-fit">
-                                        {social}
+                                        <AnimatedText id={`contact-social-${social}`} text={social} />
                                     </a>
                                 ))}
                             </div>
@@ -68,42 +82,50 @@ export default function ContactPage() {
                         <form className="space-y-12">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                                 <div className="group">
-                                    <label htmlFor="name" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Name</label>
+                                    <label htmlFor="name" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                                        <AnimatedText id="contact-form-name" text={t.contact.form.name} />
+                                    </label>
                                     <input
                                         type="text"
                                         id="name"
                                         className="w-full bg-transparent border-b border-border py-4 text-lg focus:outline-none focus:border-foreground transition-colors"
-                                        placeholder="Your name"
+                                        placeholder={t.contact.form.namePlaceholder}
                                     />
                                 </div>
                                 <div className="group">
-                                    <label htmlFor="email" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Email</label>
+                                    <label htmlFor="email" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                                        <AnimatedText id="contact-form-email" text={t.contact.form.email} />
+                                    </label>
                                     <input
                                         type="email"
                                         id="email"
                                         className="w-full bg-transparent border-b border-border py-4 text-lg focus:outline-none focus:border-foreground transition-colors"
-                                        placeholder="Your email"
+                                        placeholder={t.contact.form.emailPlaceholder}
                                     />
                                 </div>
                             </div>
 
                             <div className="group">
-                                <label htmlFor="subject" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Subject</label>
+                                <label htmlFor="subject" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                                    <AnimatedText id="contact-form-subject" text={t.contact.form.subject} />
+                                </label>
                                 <input
                                     type="text"
                                     id="subject"
                                     className="w-full bg-transparent border-b border-border py-4 text-lg focus:outline-none focus:border-foreground transition-colors"
-                                    placeholder="Project details"
+                                    placeholder={t.contact.form.subjectPlaceholder}
                                 />
                             </div>
 
                             <div className="group">
-                                <label htmlFor="message" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Message</label>
+                                <label htmlFor="message" className="block text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                                    <AnimatedText id="contact-form-message" text={t.contact.form.message} />
+                                </label>
                                 <textarea
                                     id="message"
                                     rows={4}
                                     className="w-full bg-transparent border-b border-border py-4 text-lg focus:outline-none focus:border-foreground transition-colors resize-none"
-                                    placeholder="Tell me about your vision..."
+                                    placeholder={t.contact.form.messagePlaceholder}
                                 />
                             </div>
 
@@ -112,7 +134,7 @@ export default function ContactPage() {
                                     type="submit"
                                     className="text-xs uppercase tracking-[0.3em] border border-foreground px-12 py-4 hover:bg-foreground hover:text-background transition-all duration-300"
                                 >
-                                    Send Message
+                                    <AnimatedText id="contact-form-submit" text={t.contact.form.submit} />
                                 </button>
                             </div>
                         </form>

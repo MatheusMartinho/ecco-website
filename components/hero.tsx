@@ -1,8 +1,12 @@
 'use client'
 
 import { motion } from "framer-motion"
+import { AnimatedText } from "./animated-text"
+import { useLanguage } from "./language-provider"
 
 export default function Hero() {
+  const { t } = useLanguage()
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 overflow-hidden pt-20">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center w-full max-w-screen-2xl mx-auto">
@@ -20,7 +24,7 @@ export default function Hero() {
               animate={{ scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               src="https://i.imgur.com/6TgcMQ7.png"
-              alt="Side profile of model"
+              alt={t.hero.leftAlt}
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
           </div>
@@ -50,7 +54,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 1 }}
             className="mt-6 text-xs md:text-sm uppercase tracking-[0.3em] font-light"
           >
-            Couture & Editorial Photography
+            <AnimatedText id="hero-tagline" text={t.hero.tagline} />
           </motion.p>
         </div>
 
@@ -67,7 +71,7 @@ export default function Hero() {
               animate={{ scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               src="https://i.imgur.com/tt7MaZh.png"
-              alt="Fashion editorial shot"
+              alt={t.hero.rightAlt}
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
           </div>
@@ -81,7 +85,9 @@ export default function Hero() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
-        <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+        <span className="text-[10px] uppercase tracking-widest">
+          <AnimatedText id="hero-scroll" text={t.hero.scroll} />
+        </span>
         <div className="w-[1px] h-12 bg-foreground/20 overflow-hidden">
           <motion.div
             animate={{ y: ["-100%", "100%"] }}

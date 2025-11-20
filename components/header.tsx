@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useLanguage } from './language-provider'
+import { AnimatedText } from './animated-text'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const { scrollY } = useScroll()
+  const { t, language, setLanguage } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +19,9 @@ export default function Header() {
   }, [])
 
   const navItems = [
-    { name: 'Work', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' }
+    { id: 'work', label: t.nav.work, href: '/' },
+    { id: 'about', label: t.nav.about, href: '/about' },
+    { id: 'contact', label: t.nav.contact, href: '/contact' }
   ]
 
   return (
@@ -45,24 +47,56 @@ export default function Header() {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-12">
-          {navItems.map((item, index) => (
-            <Link key={item.name} href={item.href} passHref>
+        <nav className="hidden md:flex items-center gap-10">
+          {navItems.map((item) => (
+            <Link key={item.id} href={item.href} passHref>
               <motion.span
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-xs font-medium uppercase tracking-widest hover:text-muted-foreground transition relative group cursor-pointer"
+                initial={false}
+                className="text-xs font-medium uppercase tracking-widest hover:text-muted-foreground transition relative group cursor-pointer overflow-hidden"
               >
-                {item.name}
+                <AnimatedText id={`nav-${item.id}`} text={item.label} className="block" />
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full" />
               </motion.span>
             </Link>
           ))}
+          <div className="flex items-center gap-2 border border-border rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
+            <button
+              onClick={() => setLanguage('pt')}
+              className={`transition-colors ${language === 'pt' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              aria-label="Selecionar português"
+            >
+              PT
+            </button>
+            <span className="text-muted-foreground">/</span>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`transition-colors ${language === 'en' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Menu */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-4">
+          <div className="flex items-center gap-1 text-[10px] uppercase tracking-[0.2em]">
+            <button
+              onClick={() => setLanguage('pt')}
+              className={`transition-colors ${language === 'pt' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              aria-label="Selecionar português"
+            >
+              PT
+            </button>
+            <span className="text-muted-foreground">/</span>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`transition-colors ${language === 'en' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+          </div>
           <button className="text-xs uppercase tracking-widest">Menu</button>
         </div>
       </div>

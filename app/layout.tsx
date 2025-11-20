@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { cookies } from "next/headers"
 import { Playfair_Display, Inter } from "next/font/google"
+import { LanguageProvider, type Language } from "@/components/language-provider"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -17,8 +19,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Amélie Dupont - Photographer",
-  description: "Portfolio de fotografia profissional de moda e lifestyle",
+  title: "Alessandra Santos - Fotografia de Moda e Editorial",
+  description: "Portfolio de fotografia de moda, beleza e editorial por Alessandra Santos",
   generator: "v0.app",
   icons: {
     icon: [
@@ -44,10 +46,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = cookies()
+  // Some runtimes may not expose .get; guard to avoid server crashes.
+  const cookieLang =
+    typeof (cookieStore as any)?.get === "function"
+      ? (cookieStore as any).get("language")?.value
+      : undefined
+  const initialLanguage: Language = cookieLang === "en" ? "en" : "pt"
+  const htmlLang = initialLanguage === "pt" ? "pt-BR" : "en"
+
   return (
-    <html lang="pt-BR" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang={htmlLang} className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-sans antialiased bg-background text-foreground selection:bg-primary/20">
-        {children}
+        <LanguageProvider initialLanguage={initialLanguage}>
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>
